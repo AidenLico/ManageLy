@@ -1,0 +1,104 @@
+#title {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.barTitle {
+    font-size: 20px;
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.updatePopup {
+    display: none;
+    position: fixed;
+    top: 25vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    height: 50vh;
+    padding: 20px;
+    background-color: #ecd4f7;
+    border: 4px solid black;
+}
+.updatePopup form input {
+    width: 80%;
+    margin-bottom: 40px;
+}
+
+.closePopup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size:20px;
+    cursor: pointer;
+}
+
+#viewStockContainer {
+    width: 45vw;
+    min-height: 10vh;
+    background-color: #d093ec;
+    padding: 20px;
+    border: 2px solid black;
+    justify-content: center;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.update {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 30%;
+}
+
+.updateForm {
+    text-align: center;
+}
+
+.updateForm button {
+    width: 30%;
+}
+
+.stock {
+    text-align: left;
+}
+
+#addStockForm {
+    text-align: center;
+    margin-top: 70px;
+}
+
+#addStockForm input {
+    width: 60%;
+    margin-bottom: 20px;
+}
+
+#alertsContainer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+}
+
+.alert {
+    margin-bottom: 20px;
+}
+
+#forecastContainer {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+}
+
+.forecastProduct {
+    text-align: left;
+}
+
+@media screen and (max-width: 900px) {
+    #viewStockContainer {
+        width: 60vw;
+    }
+}

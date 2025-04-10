@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+<title>ManageLy: Index</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/index.css">
+{% endblock styles %}
+
+{% block content %}
+    <div class="div" id="title">
+        Login
+    </div>
+    <div class="div" id="loginContainer">
+        <form class="form" id="loginForm" method="post">
+            <input type="email" placeholder="Email Address" class="input" id="emailInput" name="email">
+            <input type="password" placeholder="Password" class="input" id="passwordInput" name="password">
+            <button class="button" id="loginButton">Login</button>
+        </form>
+    </div>
+{% endblock content %}

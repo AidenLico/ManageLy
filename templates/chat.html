@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Chat</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/chat.css">
+{% endblock styles %}
+
+{% block leftSideBar %}
+{% if usertype=="manager" %}
+<div class="barTitle">
+    Direct Messages
+</div>
+<div id="directMessagesContainer">
+    {% for directMessage in directMessages %}
+    <div class="whoTo">>> {{ directMessage[0][0] }}</div>
+    <div class="messageContent">
+        You: {{ directMessage[0][1] }}
+    </div>
+    <div class="reply">
+        {% if directMessage[1] %}
+        {{ directMessage[1][0] }}: {{ directMessage[1][1] }}
+        {% else %}
+        AWAITING REPLY...
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock leftSideBar %}
+
+{% block rightSideBar %}
+{% if usertype=="manager" %}
+<div class="barTitle">
+    Direct Message
+</div>
+<form class="directMessage" method="post">
+    <label for="selectEmployee">Employee: </label>
+    <select class="formItem" id="selectEmployee" name="selectEmployee">
+        {% for employee in employees %}
+        <option value="{{ employee[0] }}">{{ employee[1] }}</option>
+        {% endfor %}
+    </select>
+    <input class="formItem" id="message" name="directMessage" placeholder="Message: ">
+    <button class="formItem" id="directSend" name="action" value="directSend">Send</button>
+</form>
+{% elif usertype=="employee" %}
+<div class="barTitle">
+    Direct Messages
+</div>
+<div class="directMessageContainer">
+    {% for message in directmessages %}
+    <div class="employeeDirectMessage">
+        {{ message[1] }}: {{ message[2] }}
+    </div>
+    <form class="employeeDirectMessageForm" method="post">
+        <input class="directMessageInput" type="text" placeholder="Message:" name="directEmployeeMessage">
+        <input type="hidden" name="directMessageID" value="{{ message[0] }}">
+        <button class="employeeSend" name="action" value="directEmployeeSend">Send</button>
+    </form>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock rightSideBar %}
+
+{% block content %}
+<div id="title">
+    Chat
+</div>
+<div class="div" id="chatContainer">
+    {% for message in groupmessages %}
+    <div class="messageContainer">
+        <div class="message">
+            {% if message[1] == username %}
+            You: {{ message[4] }}
+            {% else %}
+            {{ message[1] }}: {{ message[4] }}
+            {% endif %}
+        </div>
+        <form class="replyForm" method="post">
+            <input type="hidden" name="messageID" value="{{ message[0] }}">
+            <input type="text" id="replyInput" name="reply" placeholder="Message:">
+            <button class="replyButton" name="action" value="replyGroup">Reply</button>
+        </form>
+    </div>
+    {% for reply in groupreplies[message[0]-1] %}
+    <div class="replyContainer">
+        {% if reply[1] == username %}
+        >> You: {{ reply[4] }}
+        {% else %}
+        >> {{ reply[1] }}: {{ reply[4] }}
+        {% endif %}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <form id="groupMessageForm" method="post">
+        <input type="text" id="messageInput" name="message" placeholder="Message:">
+        <button id="messageButton" name="action" value="messageGroup">Send</button>
+    </form>
+</div>
+{% endblock content %}
+

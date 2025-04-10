@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Holiday</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/holidaybooking.css">
+{% endblock styles %}
+
+{% block rightSideBar %}
+{% if usertype == "manager" %}
+<div class="barTitle">
+    Add Holiday
+</div>
+<form id="addHolidayForm" method="post">
+    <label for="addStartInput">Start Date: </label>
+    <input class="addFormItem" id="addStartInput" type="date" name="addStartdate">
+    <label for="addEndInput">End Date: </label>
+    <input class="addFormItem" id="addEndInput" type="date" name="addEnddate">
+    <label for="selectEmployee">Employee: </label>
+    <select class="addFormItem" id="selectEmployee" name="employee">
+        {% for employee in employees %}
+        <option value="{{ employee[0] }}">{{ employee[1] }}</option>
+        {% endfor %}
+    </select>
+    <button id="addHolidayButton" name="action" value="addHoliday">
+        Add
+    </button>
+</form>
+{% endif %}
+{% endblock rightSideBar %}
+
+{% block content %}
+
+{% if usertype == "manager" %}
+<div class="div" id="title">
+    Holiday Requests
+</div>
+<div id="holidayRequestsContainer">
+    {% for request in holidayrequests %}
+    <div class="holidayRequest">
+        <div class="holidayRequestTitle">
+            {{ request[1] }}: Holiday Request
+        </div>
+        <div class="holidayRequestStart">
+            Start Date: {{ request[2] }}
+        </div>
+        <div class="holidayRequestEnd">
+            End Date: {{ request[3] }}
+        </div>
+        <div class="holidayRequestReason">
+            Reason: {{ request[4] }}
+        </div>
+        <form class="requestApproveForm" method="post">
+            <input type="text" class="holidayRequestInput" name="denyReason" placeholder="Reason:">
+            <input type="hidden" name="requestID" value="{{ request[0] }}">
+            <br><br>
+            <button name="action" value="approveRequest">Approve</button>
+            <button name="action" value="denyRequest">Deny</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% elif usertype == "employee" %}
+<div class="div" id="title">
+    Request Holiday
+</div>
+<div class="div" id="holidayRequestContainer">
+    <form id="holidayRequestForm" method="post">
+        <label for="startInput">Start Date: </label>
+        <input class="formItem" id="startInput" type="date" name="startdate">
+        <label for="endInput">End Date: </label>
+        <input class="formItem" id="endInput" type="date" name="enddate">
+        <input class="formItem" id="reasonInput" type="text" name="reason" placeholder="Reason:">
+        <button id="submitRequest" name="action" value="submitRequest">
+            Submit Request
+        </button>
+    </form>
+</div>
+{% endif %}
+
+{% endblock content %}

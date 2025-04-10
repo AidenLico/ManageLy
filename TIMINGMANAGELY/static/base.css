@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html, body {
+    height: 100%;
+}
+
+#flash {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 10vh;
+    background-color: white;
+    text-align: center;
+    color: red;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 9999;
+}
+
+#header {
+    background: #ac40dd;
+    width: 100vw;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    padding: 0 0 0 5vw;
+}
+
+#logo {
+    font-size: 32px;
+    color: black;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+    -webkit-transition: color 0.3s ease-in-out;
+    -moz-transition: color 0.3s ease-in-out;
+    -ms-transition: color 0.3s ease-in-out;
+    -o-transition: color 0.3s ease-in-out;
+}
+
+#logo:hover {
+    color: #701b98;
+}
+
+#leftSideBar, #rightSideBar {
+    position: fixed;
+    top: 15vh;
+    width: 25vw;
+    height: 85vh;
+    background-color: #a026d9;
+    transition: transform 0.3 ease-in-out;
+    -webkit-transition: transform 0.3 ease-in-out;
+    -moz-transition: transform 0.3 ease-in-out;
+    -ms-transition: transform 0.3 ease-in-out;
+    -o-transition: transform 0.3 ease-in-out;
+}
+
+#leftSideBar {
+    left: 0;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+#rightSideBar {
+    right: 0;
+    overflow-y: auto;
+    z-index: 9999;
+}
+
+#leftBarOpenButton, #leftBarCloseButton, #rightBarOpenButton, #rightBarCloseButton {
+    display: none;
+}
+
+#leftBarOpenButton, #rightBarOpenButton {
+    position: fixed;
+    top: 18vh;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#leftBarCloseButton, #rightBarCloseButton {
+    position: fixed;
+    top: 1vh;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+#leftBarOpenButton {
+    left: 3vw;
+}
+
+#rightBarOpenButton {
+    right: 3vw
+}
+
+#leftBarCloseButton {
+    right: 1vw;
+}
+
+#rightBarCloseButton {
+    left: 1vw;
+}
+
+#leftContent, #rightContent {
+    display: flex;
+    justify-content: center;
+    padding-top: 8vh;
+}
+
+#businessName {
+    display: flex;
+    justify-content: center;
+    padding-top: 4vh;
+    font-size: 28px;
+}
+
+#mainContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4vh;
+}
+
+@media screen and (max-width: 900px) {
+
+    #header {
+        justify-content: center;
+        padding: 0;
+    }
+
+    #logo {
+        font-size: 24px;
+    }
+
+    #leftSideBar {
+        width: 40vw;
+        transform: translateX(-100%);
+        -webkit-transform: translateX(-100%);
+        -moz-transform: translateX(-100%);
+        -ms-transform: translateX(-100%);
+        -o-transform: translateX(-100%);
+    }
+
+    #rightSideBar {
+        width: 40vw;
+        transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -o-transform: translateX(100%);
+    }
+
+    #leftBarOpenButton, #leftBarCloseButton, #rightBarOpenButton, #rightBarCloseButton {
+        display: block;
+    }
+
+    #businessName {
+        font-size: 20px;
+    }
+}

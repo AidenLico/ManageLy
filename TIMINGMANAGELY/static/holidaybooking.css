@@ -1,0 +1,77 @@
+#title {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.barTitle {
+    font-size: 20px;
+    position: absolute;
+    text-align: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+#holidayRequestContainer {
+    display: flex;
+    width: 45vw;
+    height: 60vh;
+    background-color: #d093ec;
+    padding: 20px;
+    border: 2px solid black;
+    justify-content: center;
+}
+
+
+#holidayRequestForm {
+    justify-content: center;
+    text-align: center;
+    padding: 40px 80px;
+}
+
+.formItem {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#addHolidayForm {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    width: 100%;
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.addFormItem {
+    width: 100%;
+    margin-bottom: 40px;
+}
+
+#addHolidayButton {
+    align-self: center;
+    padding: 10px;
+}
+
+#holidayRequestsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 45vw;
+    height: 60vh;
+    background-color: #d093ec;
+    padding: 20px;
+    border: 2px solid black;
+    justify-content: center;
+}
+
+.holidayRequest {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.requestApproveForm {
+    justify-content: center;
+}
+
+.holidayRequestInput {
+    width: 100%;
+}

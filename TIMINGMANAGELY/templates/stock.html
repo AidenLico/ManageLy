@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Stock</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/stock.css">
+{% endblock styles %}
+
+{% block leftSideBar %}
+{% if usertype == "manager" %}
+<div class="barTitle">
+    Alerts
+</div>
+<div id="alertsContainer">
+    {% for alert in alerts %}
+    <div class="alert">
+        {{ alert[0] }} Dropped Below Minimum Amount ({{ alert[1] }})
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock leftSideBar %}
+
+{% block rightSideBar %}
+{% if usertype == "manager" %}
+<div class="barTitle">
+    Stock Forecast
+</div>
+<div id="forecastContainer">
+    Next Week:<br><br>
+    {% for stock in forecast[0] %}
+    <div class="forecastProduct">
+        {{ stock[0] }}: {{ stock[1] }}
+    </div>
+    {% endfor %}
+    <br><br><br><br>
+    Week After:<br><br>
+    {% for stock in forecast[1] %}
+    <div class="forecastProduct">
+        {{ stock[0] }}: {{ stock[1] }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock rightSideBar %}
+
+{% block content %}
+{% if usertype == "manager" %}
+<div id="title">
+    View Stock
+</div>
+<div id="viewStockContainer">
+    {% for stock in stocks %}
+    {% if stock[3] %}
+        <div class="stock">
+            {{ stock[1] }}: {{ stock[2] }} <br> Date of Perish: {{ stock[3] }}
+        </div>
+    {% else %}
+        <div class="stock">
+            {{ stock[1] }}: {{ stock[2] }}
+        </div>
+    {% endif %}
+    <form class="updateForm" method="post">
+        <input type="hidden" name="stockID" value="{{ stock[0] }}">
+        <button name="action" value="delete">Delete</button>
+    </form>
+    <button class="update" onclick="openPopup('{{ stock[0] }}')">Update</button>
+    <div class="updatePopup" id="popup{{ stock[0] }}">
+        <form method="post">
+            <a class="closePopup" onclick="closePopup('{{ stock[0] }}')">
+                ✖
+            </a>
+            <input type="hidden" name="stockID" value="{{ stock[0] }}">
+            <input type="hidden" name="currentAmount" value="{{ stock[2] }}">
+            <input type="number" name="value" placeholder="Amount:">
+            <button name="action" value="increase">Increase</button>
+            <button name="action" value="decrease">Decrease</button>
+        </form>
+    </div>
+    {% endfor %}
+
+    <form id="addStockForm" method="post">
+        <input type="text" name="name" placeholder="Stock Name:">
+        <input type="number" name="amount" placeholder="Stock Amount:">
+        <input type="date" name="date" placeholder="(Optional) Date of Perish:">
+        <input type="number" name="minAmount" placeholder="Minimum Amount:">
+        <br><br>
+        <button name="action" value="createStock">Create Stock</button>
+    </form>
+</div>
+{% endif %}
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    function openPopup(id) {
+        document.getElementById(`popup${id}`).style.display = "flex";
+    }
+    function closePopup(id) {
+        document.getElementById(`popup${id}`).style.display = "none";
+    }
+</script>
+{% endblock scripts %}

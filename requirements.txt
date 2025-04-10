@@ -1,0 +1,6 @@
+sqlite
+flask
+datetime
+docx
+os
+time

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Calendar</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/calendar.css">
+{% endblock styles %}
+
+{% block rightSideBar %}
+{% if usertype == "manager" %}
+<div class="barTitle">
+    Add Event
+</div>
+<div id="eventContainer">
+    <form id="eventForm" method="post">
+        <input type="text" name="eventName" placeholder="Event Name:">
+        <input type="date" name="startdate" placeholder="Start Date:">
+        <input type="date" name="enddate" placeholder="End Date:">
+        <button name="action" value="addEvent">Add</button>
+    </form>
+</div>
+{% endif %}
+{% endblock rightSideBar %}
+
+{% block content %}
+{% if usertype == "manager" %}
+
+<div id="title">
+    Online Calendar
+</div>
+<div id="calendarContainer">
+    <div class="day">
+        <div class="dayTitle">
+            {{ date[0] }}
+        </div>
+        {% for event in events[0] %}
+        <div class="events">
+            {{ event[1] }}
+        </div>
+        <form method="post">
+            <input type="hidden" name="eventID" value="{{ event[0] }}">
+            <button name="action" value="deleteEvent">Delete</button>
+        </form>
+        {% endfor %}
+    </div>
+    <div class="day">
+        <div class="dayTitle">
+            {{ date[1] }}
+        </div>
+        {% for event in events[1] %}
+        <div class="events">
+            {{ event[1] }}
+        </div>
+        <form method="post">
+            <input type="hidden" name="eventID" value="{{ event[0] }}">
+            <button name="action" value="deleteEvent">Delete</button>
+        </form>
+        {% endfor %}
+    </div>
+    <div class="day">
+        <div class="dayTitle">
+            {{ date[2] }}
+        </div>
+        {% for event in events[2] %}
+        <div class="events">
+            {{ event[1] }}
+        </div>
+        <form method="post">
+            <input type="hidden" name="eventID" value="{{ event[0] }}">
+            <button name="action" value="deleteEvent">Delete</button>
+        </form>
+        {% endfor %}
+    </div>
+
+    <form id="datechange" method="post">
+        <input type="hidden" name="currentdate" value="{{ date[0] }}">
+        <button name="action" value="previous">Previous</button>
+        <button name="action" value="next">Next</button>
+    </form>
+</div>
+{% elif usertype == "employee" %}
+<div id="title">
+    Online Calendar
+</div>
+<div id="calendarContainer">
+    <div class="day">
+        <div class="dayTitle">
+            {{ date[0] }}
+        </div>
+        {% for event in events[0] %}
+        <div class="events">
+            {{ event[1] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="day">
+        <div class="dayTitle">
+            {{ date[1] }}
+        </div>
+        {% for event in events[1] %}
+        <div class="events">
+            {{ event[1] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="day">
+        <div class="dayTitle">
+            {{ date[2] }}
+        </div>
+        {% for event in events[2] %}
+        <div class="events">
+            {{ event[1] }}
+        </div>
+        {% endfor %}
+    </div>
+
+    <form method="post">
+        <input type="hidden" name="currentdate" value="{{ date[0] }}">
+        <button name="action" value="previous">Previous</button>
+        <button name="action" value="next">Next</button>
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

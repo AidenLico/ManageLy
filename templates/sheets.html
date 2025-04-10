@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Sheets</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/sheets.css">
+{% endblock styles %}
+
+{% block content %}
+{% if usertype == "manager" %}
+<div id="title">
+    Request Timesheet
+</div>
+<div id="timesheetContainer">
+    <form id="timesheetForm" method="post">
+        <label for="employeeSelect">Employee: </label>
+        <select id="employeeSelect" name="employee">
+            {% for employee in employees %}
+            <option value="{{ employee[0] }}">{{ employee[1] }}</option>
+            {% endfor %}
+        </select>
+        <label for="monthSelect">Month: </label>
+        <select id="monthSelect" name="month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        <button id="download" name="action" value="download">Download</button>
+    </form>
+</div>
+{% elif usertype == "employee" %}
+<div id="title">
+    Request Paysheet
+</div>
+<div id="paysheetContainer">
+    <form id="paysheetForm" method="post">
+        <label for="monthSelect">Month: </label>
+        <select id="monthSelect" name="month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        <button id="download" name="action" value="download">Download</button>
+    </form>
+</div>
+{% endif %}
+{% endblock content %}

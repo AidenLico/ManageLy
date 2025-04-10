@@ -1,0 +1,482 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Shift Scheduling</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/shiftscheduling.css">
+{% endblock styles %}
+
+{% block leftSideBar %}
+{% if usertype=="manager" %}
+<div class="barTitle">
+    Manual Add Shift
+</div>
+<br><br>
+<form class="form" id="manualAddForm" method="post">
+    <br><br><br><br>
+    <label for="date">Date: </label>
+    <input class="input" id="date" type="date" name="date">
+    <br><br>
+    <label for="manualStartTime">Start Time: </label>
+    <input class="input" id="manualStarttime" type="time" name="manualStarttime" placeholder="Start Time: ">
+    <br><br>
+    <label for="manualEndTime">End Time: </label>
+    <input class="input" id="manualEndtime" type="time" name="manualEndtime" placeholder="End Time: ">
+    <br><br>
+    <label for="manualEmployees">Employee: </label>
+    <select class="select" id="manualEmployees" name="manualEmployee">
+        {% for employee in employees %}
+        <option value="{{ employee[0] }}"> {{ employee[1] }} </option>
+        {% endfor %}
+    </select>
+    <br><br>
+    <button class="button" id="manualSubmit" name="action" value="manualAdd">Add Shift</button>
+</form>
+{% endif %}
+{% endblock leftSideBar %}
+
+{% block rightSideBar %}
+{% if usertype=="manager" %}
+<div class="barTitle">
+    Shifts
+</div>
+<div class="div" id="shiftsContainer">
+    <div class="dayActual" id="monday">
+        <div class="dayActualText">
+            Monday:
+        </div>
+        {% for shift in actualshifts[0] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+    <div class="dayActual" id="tuesday">
+        <div class="dayActualText">
+            Tuesday:
+        </div>
+        {% for shift in actualshifts[1] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post" class="deleteForm">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+    <div class="dayActual" id="wednesday">
+        <div class="dayActualText">
+            Wednesday:
+        </div>
+        {% for shift in actualshifts[2] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+    <div class="dayActual" id="thursday">
+        <div class="dayActualText">
+            Thursday:
+        </div>
+        {% for shift in actualshifts[3] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+    <div class="dayActual" id="friday">
+        <div class="dayActualText">
+            Friday:
+        </div>
+        {% for shift in actualshifts[4] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+    <div class="dayActual" id="saturday">
+        <div class="dayActualText">
+            Saturday:
+        </div>
+        {% for shift in actualshifts[5] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+    <div class="dayActual" id="sunday">
+        <div class="dayActualText">
+            Sunday:
+        </div>
+        {% for shift in actualshifts[6] %}
+            <div>
+                {{ shift[1] }}: {{ shift[2] }} - {{ shift[3] }}
+            </div>
+            <div>
+                {% if shift[4] == 1 %}
+                Status: Accepted
+                {% else %}
+                Status: Pending
+                {% endif %}
+            </div>
+            <form method="post">
+                <input type="hidden" name="shiftID" value="{{ shift[0] }}">
+                <button class="button" id="actualDelete" name="action" value="actualDelete">Delete</button>
+            </form>
+            <br><br>
+        {% endfor %}
+    </div>
+</div>
+
+{% elif usertype=="employee" %}
+<div class="div" id="barTitle">
+    Requested Shifts
+</div>
+<div class="container">
+{% for requestedshift in requestedshifts %}
+    <div class="requestedShiftContainer">
+        <div class="requestedDate">
+            {{ requestedshift[2] }}
+        </div>
+        <div class="startEnd">
+            {{ requestedshift[3] }} - {{ requestedshift[4] }}
+        </div>
+        <form class="form" method="post">
+            <input type="hidden" name="shiftID" value="{{ requestedshift[0] }}">
+            <button class="shiftAction" name="requestedShiftAction" value="accept">
+                Accept
+            </button>
+            <button class="shiftAction" name="requestedShiftAction" value="decline">
+                Decline
+            </button>
+        </form>
+    </div>
+{% endfor %}
+</div>
+
+{% endif %}
+{% endblock rightSideBar %}
+
+{% block content %}
+{% if usertype=="manager" %}
+
+<div class="div" id="title">
+    Shift Template
+</div>
+
+<div class="div" id="shiftTemplate">
+    <div class="day" id="monday">
+        <div class="dayText">
+            Monday Shifts:
+        </div>
+        {% for shift in shifts[0] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="day" id="tuesday">
+        <div class="dayText">
+            Tuesday Shifts:
+        </div>
+        {% for shift in shifts[1] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="day" id="wednesday">
+        <div class="dayText">
+            Wednesday Shifts:
+        </div>
+        {% for shift in shifts[2] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="day" id="thursday">
+        <div class="dayText">
+            Thursday Shifts:
+        </div>
+        {% for shift in shifts[3] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="day" id="friday">
+        <div class="dayText">
+            Friday Shifts:
+        </div>
+        {% for shift in shifts[4] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="day" id="saturday">
+        <div class="dayText">
+            Saturday Shifts:
+        </div>
+        {% for shift in shifts[5] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="day" id="sunday">
+        <div class="dayText">
+            Sunday Shifts:
+        </div>
+        {% for shift in shifts[6] %}
+            <div class="shift">
+                {{ shift[2] }} - {{ shift[3] }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="div" id="actionContainer">
+    <button class="actionButton" id="openAddPopup" onclick="openPopup('add')">
+        Add Shift
+    </button>
+    <button class="actionButton" id="openDeletePopup" onclick="openPopup('delete')">
+        Delete Shift
+    </button>
+</div>
+
+<form class="form" id="startAuto" method="post">
+    <button class="actionButton" id="openAddPopup" name="action" value="auto">
+        Automatic Schedule Start
+    </button>
+</form>
+
+<div class="popup" id="addPopup">
+    <a class="closePopup" onclick="closePopup('add')">
+        ✖
+    </a>
+    <form class="form" id="addForm" method="post">
+        <label for="days">Which Day: </label>
+        <select class="select" id="days" name="day">
+            <option value="0">Monday</option>
+            <option value="1">Tuesday</option>
+            <option value="2">Wednesday</option>
+            <option value="3">Thursday</option>
+            <option value="4">Friday</option>
+            <option value="5">Saturday</option>
+            <option value="6">Sunday</option>
+        </select>
+        <br><br>
+        <input class="input" id="startime" placeholder="Start Time: " type="time" name="starttime">
+        <br><br>
+        <input class="input" id="endtime" placeholder="End Time: " type="time" name="endtime">
+        <br><br>
+        <label for="employees">Preferred Employee: </label>
+        <select class="select" id="employees" name="employee">
+            <option value="0">None</option>
+            {% for employee in employees %}
+            <option value="{{ employee[0] }}"> {{ employee[1] }} </option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button class="button" id="submit" name="action" value="add">Add Shift</button>
+    </form>
+</div>
+
+<div class="popup" id="deletePopup">
+    <a class="closePopup" onclick="closePopup('delete')">
+        ✖
+    </a>
+    <form class="form" id="addForm" method="post">
+        <label for="shifts">Which Shift: </label>
+        <select class="select" id="shifts" name="shift">
+            <option value="0">None</option>
+            {% for shift in shifts[0] %}
+            <option value="{{ shift[0] }}">Monday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+            {% for shift in shifts[1] %}
+            <option value="{{ shift[0] }}">Tuesday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+            {% for shift in shifts[2] %}
+            <option value="{{ shift[0] }}">Wednesday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+            {% for shift in shifts[3] %}
+            <option value="{{ shift[0] }}">Thursday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+            {% for shift in shifts[4] %}
+            <option value="{{ shift[0] }}">Friday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+            {% for shift in shifts[5] %}
+            <option value="{{ shift[0] }}">Saturday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+            {% for shift in shifts[6] %}
+            <option value="{{ shift[0] }}">Sunday: {{ shift[2] }} - {{ shift[3] }}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button class="button" id="submit" name="action" value="delete">Delete Shift</button>
+    </form>
+</div>
+
+{% elif usertype == "employee" %}
+<div class="div" id="title">
+    Shifts
+</div>
+<div class="div" id="employeeShiftsContainer">
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Monday:
+        </div>
+        {% for shift in employeeShifts[0] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Tuesday:
+        </div>
+        {% for shift in employeeShifts[1] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Wednesday:
+        </div>
+        {% for shift in employeeShifts[2] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Thursday:
+        </div>
+        {% for shift in employeeShifts[3] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Friday:
+        </div>
+        {% for shift in employeeShifts[4] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Saturday:
+        </div>
+        {% for shift in employeeShifts[5] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="dayContainer">
+        <div class="dayTitle">
+            Sunday:
+        </div>
+        {% for shift in employeeShifts[6] %}
+        <div class="employeeShift">
+            {{ shift[3] }} - {{ shift[4] }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    function openPopup(action) {
+        document.getElementById(`${action}Popup`).style.display = "flex";
+    }
+    function closePopup(action) {
+        document.getElementById(`${action}Popup`).style.display = "none";
+    }
+</script>
+{% endblock scripts %}

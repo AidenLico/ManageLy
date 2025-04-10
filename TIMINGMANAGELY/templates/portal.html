@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}
+<title>ManageLy: Portal</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/portal.css">
+{% endblock styles %}
+
+{% block content %}
+<div class="div" id="title">
+    {{ usertype }} Dashboard
+</div>
+<div class="div" id="subtitle">
+    Welcome, {{ username }}!
+</div>
+
+{% if usertype=="Owner" %}
+{% include "owner.html" %}
+{% endif %}
+
+{% if usertype=="Manager" %}
+{% include "manager.html" %}
+{% endif %}
+
+{% if usertype=="Employee" %}
+{% include "employee.html" %}
+{% endif %}
+
+<div class="div" id="logout">
+    <a href="/logout">Logout</a>
+</div>
+{% endblock content %}

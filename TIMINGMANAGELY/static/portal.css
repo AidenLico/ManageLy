@@ -1,0 +1,92 @@
+#title {
+    font-size: 26px;
+}
+
+#subtitle {
+    font-size: 20px;
+}
+
+#logout {
+    position: fixed;
+    display: flex;
+    bottom: 2vh;
+    width: 100vw;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+#logout a {
+    font-size: 20px;
+    cursor: pointer;
+    color: red;
+    font-weight: bolder;
+    text-decoration: none;
+}
+
+.gridsContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80vw;
+    justify-items: center;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    height: 20vh;
+    background-color: #c67de8;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease-in-out;
+    -webkit-transition: background-color 0.3s ease-in-out;
+    -moz-transition: background-color 0.3s ease-in-out;
+    -ms-transition: background-color 0.3s ease-in-out;
+    -o-transition: background-color 0.3s ease-in-out;
+}
+
+.grid:hover {
+    background-color: #aa3cdd;
+}
+
+.featureName {
+    font-size: 16px;
+    padding-bottom: 5%;
+    text-decoration: none;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+.featureImg {
+    width: 50px;
+    height: 50px;
+}
+@media screen and (max-width: 900px) {
+
+    #title {
+        font-size: 18px;
+    }
+
+    #subtitle {
+        font-size: 14px;
+    }
+
+    #logout {
+        font-size: 14px;
+    }
+
+    .gridsContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid {
+        width: 35vw;
+    }
+
+}

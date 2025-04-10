@@ -1,0 +1,45 @@
+#title {
+    font-size: 28px;
+    text-align: center;
+}
+
+#loginContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding: 2vh 2vw;
+}
+
+#loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50vw;
+}
+
+.input {
+    width: 50%;
+    padding: 10px;
+    margin: 2vh 0;
+    align-self: center;
+}
+
+#loginButton {
+    width: 50%;
+    padding: 10px;
+    margin: 2vh 0;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 900px) {
+
+    #title {
+        font-size: 20px;
+    }
+
+    .input {
+        width: 65%;
+    }
+
+}

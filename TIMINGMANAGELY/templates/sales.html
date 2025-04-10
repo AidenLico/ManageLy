@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>ManageLy: Sales</title>
+{% endblock title %}
+
+{% block styles %}
+<link rel="stylesheet" href="../static/sales.css">
+{% endblock styles %}
+
+{% block content %}
+{% if usertype == "owner" %}
+
+<div id="title">
+    Sales Breakdown
+</div>
+<div id="subtitle">
+    Week Starting {{ date }}:
+</div>
+<div id="salesContainer">
+    Product Total Sales
+    <div id="productSales">
+        {% for product in products %}
+        <div class="productSale">
+            {{ product[1] }}: {{ product[2] }}
+        </div>
+        {% endfor %}
+    </div>
+    Employee Total Sales:
+    <div id="employeeSales">
+        {% for employee in employeesSales %}
+        <div class="employeeSale">
+            {{ employee[0] }}: {{ employee[1] }}
+        </div>
+        {% endfor %}
+    </div>
+    <div id="totalMade">
+        Total Made: £{{ total }}
+    </div>
+    <form id="salesForm" method="post">
+        <input type="hidden" value="{{ date }}" name="date">
+        <button name="action" value="previous">Previous</button>
+        <button name="action" value="next">Next</button>
+    </form>
+</div>
+
+{% endif %}
+{% endblock content %}

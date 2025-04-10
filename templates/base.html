@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block title %}
+        {% endblock title %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../static/base.css">
+        {% block styles %}
+        {% endblock styles %}
+    </head>
+    <body>
+        {% include "flash.html" %}
+        <div class="div" id="header">
+            <a href="/" class="a" id="logo">ManageLy</a>
+        </div>
+        {% if leftbar %}
+            <a class="link" id="leftBarOpenButton" onclick="openLeftBar()">
+                ☰
+            </a>
+            <div class="div" id="leftSideBar">
+                <a class="link" id="leftBarCloseButton" onclick="closeLeftBar()">
+                    ✖
+                </a>
+                <div class="div" id="leftContent">
+                    {% block leftSideBar %}
+                    {% endblock leftSideBar %}
+                </div>
+            </div>
+        {% endif %}
+        {% if rightbar %}
+            <a class="link" id="rightBarOpenButton" onclick="openRightBar()">
+                ☰
+            </a>
+            <div class="div" id="rightSideBar">
+                <a class="link" id="rightBarCloseButton" onclick="closeRightBar()">
+                    ✖
+                </a>
+                <div class="div" id="rightContent">
+                    {% block rightSideBar %}
+                    {% endblock rightSideBar %}
+                </div>
+            </div>
+        {% endif %}
+        {% if businessname %}
+        <div class="div" id="businessName">
+            {{ businessname }}
+        </div>
+        {% endif %}
+        <div class="div" id="mainContent">
+            {% block content %}
+            {% endblock content %}
+        </div>
+        </body>
+        <script>
+            function openLeftBar() {
+                let leftSideBar = document.getElementById("leftSideBar");
+                leftSideBar.style.transform = "translateX(0)"
+            }
+            function closeLeftBar() {
+                let leftSideBar = document.getElementById("leftSideBar");
+                leftSideBar.style.transform = "translate(-100%)"
+            }
+            function openRightBar() {
+                let rightSideBar = document.getElementById("rightSideBar");
+                rightSideBar.style.transform = "translateX(0)"
+            }
+            function closeRightBar() {
+                let rightSideBar = document.getElementById("rightSideBar");
+                rightSideBar.style.transform = "translate(100%)"
+            }
+        </script>
+        {% block scripts %}
+        {% endblock scripts %}
+    </body>
+</html>
