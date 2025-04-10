@@ -1,6 +1,6 @@
 # ManageLy
 ManageLy is a web application designed to meet the needs of small business management, and improve the time efficiency of management tasks.
-This repository was developed by Aiden Licquorish. Any adjustments made must reference me as the original author.
+This repository was developed by Aiden Licquorish. Any adjustments made must reference me as the original author. Please email me at aiden.lico@gmail.com if you have any issues.
 # Instructions
 ## Running the Flask Application
 To run the application, you must clone this repository to your device and open the folder in visual studio or another Python IDE. YOu must naviagate the the same level as the app.py in the terminal (not the app.py in the TIMINGMANAGELY folder). Using PIP, install the requirements in requirements.txt. Now you may run "flask run" and the web application will be hosted on the http://127.0.0.0
