@@ -1,5 +1,6 @@
 # ManageLy
 ManageLy is a web application designed to meet the needs of small business management, and improve the time efficiency of management tasks.
+COVENTRY UNIVERSITY GITHUB LINK: https://github.coventry.ac.uk/licquorisa/6001CEM_ManageLy
 This repository was developed by Aiden Licquorish. Any adjustments made must reference me as the original author. Please email me at aiden.lico@gmail.com if you have any issues.
 # Instructions
 ## Running the Flask Application
